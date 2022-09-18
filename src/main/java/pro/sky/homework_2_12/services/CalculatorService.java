@@ -1,10 +1,12 @@
-package pro.sky.calculator.services;
+package pro.sky.homework_2_12.services;
 
 import org.springframework.stereotype.Service;
+import pro.sky.homework_2_12.exception.DivisionByZeroException;
+
 import java.lang.Number;
 
 @Service
-public class CalculatorServiceInpl implements Calculator {
+public class CalculatorService{
 
     public Integer getAddition(Integer num1, Integer num2) {
         return num1 + num2;
@@ -19,6 +21,9 @@ public class CalculatorServiceInpl implements Calculator {
     }
 
     public Double getDivision(Integer num1, Integer num2) {
+        if (num2 == 0) {
+            throw new DivisionByZeroException(" Деление на ноль не возможно! ");
+        }
         return num1 / (double)num2;
     }
 

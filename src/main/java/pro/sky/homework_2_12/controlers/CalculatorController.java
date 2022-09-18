@@ -1,21 +1,22 @@
-package pro.sky.calculator.controllers;
+package pro.sky.homework_2_12.controlers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.calculator.services.CalculatorServiceInpl;
-import java.util.Objects;
+import pro.sky.homework_2_12.services.CalculatorService;
+import pro.sky.homework_2_12.exception.DivisionByZeroException;
 
+import java.util.Objects;
 
 
 @RestController
 @RequestMapping("calculator")
 public class CalculatorController {
 
-    private final CalculatorServiceInpl calculatorService;
+    private final CalculatorService calculatorService;
 
-    public CalculatorController(CalculatorServiceInpl calculatorService) {
+    public CalculatorController(CalculatorService calculatorService) {
         this.calculatorService = calculatorService;
     }
 
@@ -57,9 +58,7 @@ public class CalculatorController {
         if (Objects.isNull(num1) || Objects.isNull(num2)) {
             return "Передайте два параметра";
         }
-        if (num2 == 0) {
-            return "Деление на 0 не возможно!";
-        }
+
         return calculatorService.getAnswer(num1, num2, calculatorService.getDivision(num1, num2), "/");
     }
 }
